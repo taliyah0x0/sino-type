@@ -1,0 +1,31 @@
+<html style="background-color: rgb(226, 199, 140); color: rgb(60, 20, 0)">
+    <head>
+        <link rel="stylesheet" href="sino-type.css">
+    </head>
+    <div style="display: flex; flex-direction: column">
+        <h2 class="title">Sino-Type</h2>
+        <div class="languages" style="display: flex; flex-direction: row; gap: 0.2rem; height: 2rem; align-items: center">
+            <p style="font-family: Choko; margin-left: 1rem">Filter only:</p>
+            <label><input name="Shanghainese" type="checkbox" checked class="language_option" onclick="editLanguages(0)">Shanghainese</label>
+            <label><input name="Korean" type="checkbox" class="language_option" onclick="editLanguages(1)">Korean</label>
+            <label><input name="Taiwanese" type="checkbox" class="language_option" onclick="editLanguages(2)">Taiwanese</label>
+            <label><input name="Vietnamese" type="checkbox" class="language_option" onclick="editLanguages(3)">Vietnamese</label>
+        </div>
+        <div id="boxes">
+            <div style="display: flex; flex-direction: column">
+                <h3 class="box-title box-title1">Romanization</h3>
+                <div id="highlight-area" class="textareas"></div>
+                <div contenteditable id="input-area" oninput="initiate()" onclick="initiate()" class="textareas"></div>
+            </div>
+            <div style="display: flex; flex-direction: column">
+                <h3 class="box-title box-title2">Hanzi</h3>
+                <div id="highlight-area-2" class="textareas"></div>
+                <div id="output-area" class="textareas"></div>
+                <div id="copy-button" onclick="copy()"></div>
+            </div>
+        </div>
+        <h3 class="box-title3">Select:</h3>
+        <div id="options-wrapper"></div>
+    </div>
+    <script src="sino-type.js"></script>
+</html>
