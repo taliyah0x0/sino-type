@@ -41,6 +41,7 @@ function initiate () {
     }
 
     let word = text.slice(start, end);
+    word = word.toLowerCase();
 
     let tokens = text.split(/(\s+|[^\w\s])/g).filter(token => token.trim());
     let charIndex = 0;
