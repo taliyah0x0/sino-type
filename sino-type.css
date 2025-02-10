@@ -8,7 +8,16 @@
     src: url("dosis.ttf");
 }
 
-h3, h2 {
+h3 {
+    text-align: center;
+    margin: 1vw;
+    margin-top: -0.2vw;
+    color: rgb(60, 20, 0);
+    font-family: Choko;
+  }
+  
+
+h2 {
     font-family: Choko;
     color: rgb(60, 20, 0);
     font-weight: normal;
@@ -103,11 +112,11 @@ span {
 
 .box-title3 {
     height: 50px;
-    margin: 2rem 0 0 2rem;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     display: none;
+    position: absolute;
 }
 
 #copy-button {
@@ -134,7 +143,8 @@ span {
     #input-area {
         width: 45vw;
         height: 20vh;
-        position: relative;
+        position: absolute;
+        top: calc(170px + 2rem);
         font-size: 1.5rem;
     }
 
@@ -205,9 +215,18 @@ span {
     .textareas {
         border-radius: 10px;
     }
+
+    .box-title3 {
+        top: calc(170px + 5rem + 20vh);
+    }
+
+    #options-wrapper {
+        position: absolute;
+        top: calc(170px + 7rem + 20vh);
+    }
 }
 
-@media only screen and (max-aspect-ratio: 1/1) { /* For laptop */
+@media only screen and (max-aspect-ratio: 1/1) { /* For phone */
     #boxes {
         display: flex;
         flex-direction: column;
@@ -215,9 +234,10 @@ span {
 
     #input-area {
         width: 90vw;
-        left: 2vw;
+        left: 3vw;
         height: 25vh;
-        position: relative;
+        position: absolute;
+        top: calc(200px + 2rem);
         font-size: 3rem;
     }
     
@@ -271,6 +291,12 @@ span {
 
     .box-title3 {
         font-size: 2.5rem;
+        top: calc(200px + 25vh + 10vw + 2rem);
+    }
+
+    #options-wrapper {
+        position: absolute;
+        top: calc(200px + 25vh + 10vw + 5rem);
     }
 
     #copy-button {
@@ -313,3 +339,30 @@ span {
         border-radius: 30px;
     }
 }
+  
+  h1 {
+    display: flex;
+    flex: 6;
+    margin: 1vw;
+    color: rgb(60, 20, 0);
+    font-family: Choko;
+  }
+  
+  .menu-button {
+    font-size: 2vw;
+    padding: 1vw;
+    border: none;
+    height: 3vmax;
+    cursor: default;
+    margin: 0 0.2vw 0 0.5vw;
+    background-color: rgb(226, 199, 140);
+    border-radius: 2vmax;
+  }
+  
+  .menu-button:hover {
+    cursor: pointer;
+  }
+  
+  a {
+    text-decoration: none;
+  }

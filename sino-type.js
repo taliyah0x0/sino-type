@@ -369,3 +369,15 @@ fetch(`output.json`)
     .catch((error) => {
         console.error("Error fetching the JSON file:", error);
     });
+
+function menuMOU() {
+    let menus = document.getElementsByClassName("menu-button");
+    for (var i = 0; i < menus.length; i++) {
+        menus[i].style.backgroundColor = "rgb(226, 199, 140)";
+    }
+}
+    
+function menuMOV(select) {
+    let menus = document.getElementsByClassName("menu-button");
+    menus[select].style.backgroundColor = "#FAE6AA";
+}
