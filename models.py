@@ -1,8 +1,17 @@
 from app import db 
 
-class City:
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(35), nullable=False)
-    countrycode = db.Column(db.String(3), nullable=False)
-    district = db.Column(db.String(20))
-    population = db.Column(db.Integer)
+class Shanghainese(db.Model):
+    hanzi = db.Column(db.String(3), primary_key=True)
+    roman = db.Column(db.String(10), primary_key=True)
+
+class Korean(db.Model):
+    hanzi = db.Column(db.String(3), primary_key=True)
+    roman = db.Column(db.String(10), primary_key=True)
+
+class Taiwanese(db.Model):
+    hanzi = db.Column(db.String(3), primary_key=True)
+    roman = db.Column(db.String(10), primary_key=True)
+
+class Vietnamese(db.Model):
+    hanzi = db.Column(db.String(3), primary_key=True)
+    roman = db.Column(db.String(10), primary_key=True)
