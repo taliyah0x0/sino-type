@@ -11,7 +11,16 @@
     <meta property="og:image:height" content="1024">
   </head>
   <body>
-    <form action="#" method="POST">
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+          <p>{{msg}}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form action="" method="POST">
         <select name="language" required>
           <option value="Shanghainese">Shanghainese</option>
           <option value="Korean">Korean</option>
@@ -25,6 +34,7 @@
     <br>
     {% if hanzi %}
       <p>Most recent addition: {{ hanzi }}, {{ roman }} in {{ language }}</p>
+      <input type="submit" value="Delete"/>
     {% endif %}
   </body>
 </html>
