@@ -11,6 +11,10 @@
     <meta property="og:image:height" content="1024">
   </head>
   <body>
+    <div style="display: flex; flex-direction: row;">
+      <h1>BobaWay Admin Portal</h1>
+      <a href="logout"><button class="menu-button">Logout</button></a>
+    </div>
 
     {% with messages = get_flashed_messages() %}
       {% if messages %}
