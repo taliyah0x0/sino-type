@@ -5,6 +5,7 @@ from flask_login import login_user, LoginManager, login_required, logout_user, c
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length
+import re
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -30,7 +31,7 @@ def adminloginpage():
         user = Admin.query.filter_by(username=form.username.data).first()
         if user: 
             if encryption.check_password_hash(user.password, form.password.data):
-        # TODO: Check that the correct password has been entered 
+                session["database_entries"] = list() 
                 login_user(user)
                 return redirect(url_for("adminportal"))
         else: 
@@ -42,10 +43,6 @@ def adminloginpage():
 @app.route("/admin-portal", methods=["POST", "GET"])
 @login_required
 def adminportal():
-    # This is if the user is simply being redirected after logging in 
-    if request.method == "GET":
-        session["database_entries"] = dict() 
-        return render_template("adminportal.html")
     
     # This is if the user has submitted the database update form 
     if request.method == "POST":
@@ -55,17 +52,24 @@ def adminportal():
         hanzi = request.form["hanzi"] 
         roman = request.form["romanization"] 
 
-        # TODO: check and clean the user input to ensure consistency 
-        # Check that hanzi is actually hanzi, somehow 
-        # Check roman is all English letters, somehow 
-        # Prevent SQL injections 
+        # Checks that the romanji input is all English characters 
         roman = roman.lower() 
+        if (not checkRoman(roman)):
+            flash(f"The romanji must consist entirely of Latin characters, no punctuation.")
+
+        # Checks that the hanzi is actually hanzi 
+        elif (not checkHanzi(hanzi)):
+            flash(f"The hanzi you have entered is not a valid hanzi character.")
+
         # Checks if the entry already exists in the database. If so, let the admin know. 
-        if (checkEntryExistence(language, hanzi, roman)):
+        elif (checkEntryExistence(language, hanzi, roman)):
             flash(f"You have already added ({hanzi}, {roman}) to the {language} database.", "info")
+
         else:
+            # TODO: store recently added entries so they can be deleted if there has been a mistake
+            # session["database_entries"].append((hanzi, roman, language)) 
+            
             # Update the corresponding table in database 
-            session["database_entries"][(hanzi, roman)] = language 
             if language == "Shanghainese":
                 db.session.add(Shanghainese(hanzi, roman)) 
                 db.session.commit()
@@ -78,11 +82,18 @@ def adminportal():
             elif language == "Vietnamese":
                 db.session.add(Vietnamese(hanzi, roman)) 
                 db.session.commit()
-        # Refresh the page 
 
-        # TODO: replace the inputs with "session["database_entries"]"
-        return render_template("adminportal.html", language=language, hanzi=hanzi, roman=roman)
+    return render_template("adminportal.html", recents=session["database_entries"])
     
+# Returns true if the given string is a hanzi character. Otherwise, false. 
+def checkHanzi(hanzi):
+    return re.search(u'[\u4e00-\u9fff]', hanzi)
+
+# Returns true if the given string consists entirely of Latin alphabet. Otherwise, false. 
+def checkRoman(roman):
+    char_set = "abcdefghijklmnopqrstuvwxyz"
+    return all((True if x in char_set else False for x in roman))
+
 # Returns true if the entry has already been added. 
 def checkEntryExistence(language, h, r):
     found = False 

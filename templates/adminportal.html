@@ -31,14 +31,18 @@
           <option value="Taiwanese">Taiwanese</option>
           <option value="Vietnamese">Vietnamese</option>
         </select>
-        <input type="text" name="hanzi" placeholder="Enter the Hanzi" autocomplete="off" required/>
-        <input type="text" name="romanization" placeholder="Enter the romanization" autocomplete="off" required/>
+        <input type="text" name="hanzi" placeholder="Enter the Hanzi" autocomplete="off" maxlength="1" required/>
+        <input type="text" name="romanization" placeholder="Enter the romanization" autocomplete="off" maxlength="6" required/>
         <input type="submit" value="Submit"/>
     </form>
     <br>
-    {% if hanzi %}
-      <p>Most recent addition: {{ hanzi }}, {{ roman }} in {{ language }}</p>
-      <input type="submit" value="Delete"/>
-    {% endif %}
+    Recent database entries: 
+    {% for entry in recents %}
+      <div>
+        <p>{{ entry }}</p>
+      </div>
+    {% endfor %}
+    <br>
+    <p>If any issues arise, please email yao.tong2018@outlook.com</p>
   </body>
 </html>
