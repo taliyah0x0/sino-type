@@ -38,9 +38,9 @@
     <br>
     Recent database entries: 
     {% for entry in recents %}
-      <div>
-        <p>{{ entry }}</p>
-      </div>
+      <ul list-style-type="None">
+        <li>{{ entry }} <button>Delete</button></li>
+      </ul>
     {% endfor %}
     <br>
     <p>If any issues arise, please email yao.tong2018@outlook.com</p>

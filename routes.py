@@ -67,7 +67,8 @@ def adminportal():
 
         else:
             # TODO: store recently added entries so they can be deleted if there has been a mistake
-            # session["database_entries"].append((hanzi, roman, language)) 
+            session["database_entries"].append((hanzi, roman, language)) 
+            session.modified = True 
             
             # Update the corresponding table in database 
             if language == "Shanghainese":
